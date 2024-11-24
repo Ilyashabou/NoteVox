@@ -14,7 +14,3 @@ A simple notepad application for Android that allows users to create, edit, and 
 - Database: SQLite (or Room)
 - Voice Recognition: Google Voice API
 
-## How to Use
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/username/repo-name.git
