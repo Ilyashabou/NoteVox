@@ -18,6 +18,8 @@ A simple notepad application for Android that allows users to create, edit, and 
 
 ## App Screenshot
 ![Home Screen](1.png)
+(2.png)
+(3.png)
 
 This is the main screen of the Smart Notepad app where users can view and manage their notes.
 
