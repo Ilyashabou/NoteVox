@@ -14,3 +14,11 @@ A simple notepad application for Android that allows users to create, edit, and 
 - Database: SQLite (or Room)
 - Voice Recognition: Google Voice API
 
+  # Smart Notepad with Voice Commands
+
+## App Screenshot
+![Home Screen](images/1.png)
+
+This is the main screen of the Smart Notepad app where users can view and manage their notes.
+
+
