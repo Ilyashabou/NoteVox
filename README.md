@@ -18,7 +18,7 @@ A simple notepad application for Android that allows users to create, edit, and 
 
 <img src="1.png" alt="First Screen" width="300"/>
 <img src="2.png" alt="Home Screen" width="300"/>
-<p>This is the main screen of the Smart Notepad app where users can view and manage their notes.</p>
+<p>This is the main screen of the Smart Notepad app <br> where users can view and manage their notes.</p>
 <img src="3.png" alt="note voice Screen" width="300"/>
 
 
