@@ -17,10 +17,11 @@ A simple notepad application for Android that allows users to create, edit, and 
   # Smart Notepad with Voice Commands
 
 ## App Screenshot
-![Home Screen](1.png)
-(2.png)
-(3.png)
-
+![First Screen](1.png)
+![Home Screen](2.png)
 This is the main screen of the Smart Notepad app where users can view and manage their notes.
+![note voice Screen](3.png)
+
+
 
 
