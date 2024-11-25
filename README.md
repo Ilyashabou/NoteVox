@@ -11,7 +11,7 @@ A simple notepad application for Android that allows users to create, edit, and 
 
 ## Technologies Used
 - Language: Java
-- Database: SQLite (or Room)
+- Database: FireBase
 - Voice Recognition: Google Voice API
 
   # App Screenshot
