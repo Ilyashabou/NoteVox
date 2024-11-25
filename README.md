@@ -12,7 +12,8 @@ A simple notepad application for Android that allows users to create, edit, and 
 ## Technologies Used
 - Language: Java
 - Database: FireBase
-- Voice Recognition: Google Voice API
+- Voice Recognition:  SpeechRecordgnizer API
+- display note : RecycleView
 
   # App Screenshot
 
