@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_blue"
+    android:padding="16dp">
+
+    <!-- Settings icon -->
+    <ImageView
+        android:id="@+id/settings_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Settings"
+        android:src="@drawable/ic_settings" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="NoteVox"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- SearchView -->
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- List of Notes -->
+    <LinearLayout
+        android:id="@+id/notes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_view"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/note1_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="NOTE 1"
+            android:background="@color/blue"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/note2_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="NOTE 2"
+            android:background="@color/blue"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/note3_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="NOTE 3"
+            android:background="@color/blue"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/note4_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="NOTE 4"
+            android:background="@color/blue"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/note5_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="NOTE 5"
+            android:background="@color/blue"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/note6_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="NOTE 6"
+            android:background="@color/blue"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <!-- Add Note Button -->
+    <ImageButton
+        android:id="@+id/add_note_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_add"
+        android:contentDescription="Add Note" />
+
+    <!-- Delete Button -->
+    <ImageButton
+        android:id="@+id/delete_note_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_delete"
+        android:contentDescription="Delete Note" />
+
+</RelativeLayout>
