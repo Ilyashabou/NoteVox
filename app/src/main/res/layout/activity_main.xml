@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAF4FE"
+    tools:context=".MainActivity">
+
+    <!-- Paramètres Icône -->
+    <ImageView
+        android:id="@+id/settings_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/SETTING"
+        android:contentDescription="Settings Icon"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- Titre -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="NoteVox"
+        android:textSize="24sp"
+        android:textColor="#007BFF"
+        android:textStyle="bold" />
+
+    <!-- Bannière -->
+    <TextView
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="16dp"
+        android:background="#007BFF"
+        android:gravity="center"
+        android:text="NOTE 1"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- Contenu du bloc de texte -->
+
+    <!-- Barre d'enregistrement vocale -->
+
+    <TextView
+        android:id="@+id/note_content"
+        android:layout_width="407dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/banner"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="#FFFFFF"
+        android:lineSpacingExtra="8dp"
+        android:padding="16dp"
+        android:shadowColor="#BDBDBD"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:text="A notepad is a versatile tool that serves a multitude of purposes, whether digital or physical. Typically, it contains blank or lined pages for jotting down notes, ideas, lists, or reminders."
+        android:textColor="#333333" />
+
+    <ImageView
+        android:id="@+id/voice_wave"
+        android:layout_width="198dp"
+        android:layout_height="165dp"
+        android:layout_below="@id/note_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="206dp"
+        android:contentDescription="Voice Wave Icon"
+        android:src="@drawable/Vocal" />
+
+    <!-- Boutons Pause et Micro -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/voice_wave"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <!-- Bouton Pause -->
+
+        <!-- Bouton Micro -->
+        <!-- Bouton Arrêter (Carré) -->
+
+        <ImageView
+            android:id="@+id/pause_button"
+            android:layout_width="101dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Pause Button"
+            android:src="@drawable/PAUSE" />
+
+        <ImageView
+            android:id="@+id/micro_button"
+            android:layout_width="105dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Microphone Button"
+            android:src="@drawable/MIC" />
+
+        <ImageView
+            android:id="@+id/micro_button"
+            android:layout_width="98dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Microphone Button"
+            android:src="@drawable/ARR" />
+
+
+    </LinearLayout>
+</RelativeLayout>

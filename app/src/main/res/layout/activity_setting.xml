@@ -1,0 +1,130 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3F2FD">
+
+    <!-- Titre principal -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NoteVox"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        android:textColor="#007BFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Sous-titre -->
+    <TextView
+        android:id="@+id/settings_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#007BFF"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Cadre contenant les paramètres -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/settings_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        android:background="@drawable/cadre"
+        app:layout_constraintTop_toBottomOf="@id/settings_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Contenu du cadre -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Voice Commands -->
+            <Switch
+                android:id="@+id/voice_commands"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Voice Commands"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <!-- Dark/Light Mode -->
+            <Switch
+                android:id="@+id/dark_mode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Dark/Light Mode"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <!-- Notifications -->
+            <Switch
+                android:id="@+id/notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Notifications"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <!-- Change Note Sorting -->
+            <CheckBox
+                android:id="@+id/change_note_sorting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Change Note Sorting"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <!-- Auto-Save Notes -->
+            <CheckBox
+                android:id="@+id/auto_save_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Auto-Save Notes"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <!-- Language Selector -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="Language Icon"
+                    android:src="@drawable/lang" />
+
+                <TextView
+                    android:id="@+id/language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Language"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
