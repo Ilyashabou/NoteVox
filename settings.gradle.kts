@@ -19,6 +19,10 @@ dependencyResolutionManagement {
     }
 }
 
+<<<<<<< HEAD
 rootProject.name = "NoteVox"
+=======
+rootProject.name = "Notevox"
+>>>>>>> 034eff44ca652857cd7d06d70e9f5e7316174099
 include(":app")
  

@@ -26,8 +26,13 @@ android {
         }
     }
     compileOptions {
+<<<<<<< HEAD
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+=======
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+>>>>>>> 034eff44ca652857cd7d06d70e9f5e7316174099
     }
 }
 
