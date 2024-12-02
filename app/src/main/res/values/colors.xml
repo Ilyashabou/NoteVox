@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-</resources>
-=======
 <resources>
     <color name="background_color">#E3F2FD</color> <!-- Light blue -->
     <color name="primary_color">#1A73E8</color> <!-- Blue -->
@@ -17,16 +10,23 @@
     <!-- Button Color -->
     <color name="button_blue">#66B2FF</color>
 
+    <color name="dark_blue">#00008B</color>
     <!-- Text Color -->
     <color name="white">#FFFFFF</color>
 
     <!-- Background Color -->
     <color name="background">#F4F9FF</color>
 
+    <color name="backgrounds">#F4F9FF</color>
+
     <!-- Search Bar Background -->
     <color name="search_bar_bg">#E0F2F7</color>
 
     <!-- Icon Color -->
     <color name="icon_color">#4F9CE8</color>
+
+    <color name="hintTextColor">#9E9E9E</color> <!-- Light Gray Hint -->
+    <color name="gray">#D3D3D3</color> <!-- Border Color -->
+    <color name="blue_primary">#2196F3</color> <!-- Optional Primary Theme Color -->
+
 </resources>
->>>>>>> 034eff44ca652857cd7d06d70e9f5e7316174099

@@ -1,19 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#E3F2FD"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- App Logo -->
+<ImageView
+android:id="@+id/app_logo"
+android:layout_width="120dp"
+android:layout_height="120dp"
+android:layout_centerHorizontal="true"
+android:layout_marginTop="50dp"
+android:src="@drawable/lanch"
+    android:contentDescription="App Logo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- App Name -->
+<TextView
+android:id="@+id/app_name"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_below="@id/app_logo"
+android:layout_marginTop="20dp"
+android:layout_centerHorizontal="true"
+android:text="NoteVox"
+android:textSize="30sp"
+android:textStyle="bold"
+android:textColor="#1A73E8"/>
+
+    <!-- Loading Bar -->
+<ProgressBar
+android:id="@+id/loading_bar"
+style="?android:attr/progressBarStyleHorizontal"
+android:layout_width="200dp"
+android:layout_height="10dp"
+android:layout_below="@id/app_name"
+android:layout_marginTop="30dp"
+android:layout_centerHorizontal="true"
+android:indeterminate="true"
+    android:progressDrawable="@drawable/loading_progress" />
+
+    <!-- Loading Text -->
+<TextView
+android:id="@+id/loading_text"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_below="@id/loading_bar"
+android:layout_marginTop="15dp"
+android:layout_centerHorizontal="true"
+android:text="Loading..."
+android:textSize="18sp"
+android:textStyle="bold"
+android:textColor="#1A73E8"
+android:fontFamily="sans-serif" />
+
+    </RelativeLayout>
