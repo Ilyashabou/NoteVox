@@ -4,20 +4,26 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp"
-    android:background="@color/light_blue">
+    android:background="@drawable/rounded_search_background">
+
 
     <ImageView
         android:id="@+id/image_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/image_items"/>
+        android:src="@drawable/ic_edit"
+
+        />
 
     <TextView
         android:id="@+id/note_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
         android:textColor="@android:color/black"
-        android:text="Note Placeholder" />
+        android:text="Note Placeholder"
+        android:layout_below="@id/image_item"
+        android:layout_marginLeft="16dp"/>
+
 
 </LinearLayout>

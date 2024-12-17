@@ -1,7 +1,8 @@
 package com.example.notevox;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.view.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +29,11 @@ public class HomeActivity extends AppCompatActivity {
         NoteAdapter adapter = new NoteAdapter(notes);
         recyclerView.setAdapter(adapter);
 
+    }
+
+    public void AddNotes(View view) {
+        Intent intent = new Intent(this, NotesActivity.class);
+        startActivity(intent);
     }
 
 

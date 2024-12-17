@@ -19,10 +19,6 @@
         android:theme="@style/Theme.Notevox"
         tools:targetApi="31">
 
-
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -32,6 +28,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NotesActivity"
+            />
+
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/light_blue"
+    android:background="#E3F2FD"
     android:padding="16dp">
 
     <!-- Settings Icon -->
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="NoteVox"
         android:textColor="@android:color/black"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,6 @@
         android:textColorHint="@color/hintTextColor"
         android:textColor="@android:color/black" />
 
-
     <!-- List of Notes -->
     <LinearLayout
         android:id="@+id/notes_list"
@@ -60,8 +59,6 @@
         app:layout_constraintTop_toBottomOf="@id/search_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/rounded_search_background"
-
         >
 
         <androidx.recyclerview.widget.RecyclerView
@@ -89,16 +86,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:src="@drawable/ic_add"
         android:layout_marginBottom="6dp"
-
-        />
-
+        android:contentDescription="Add a new note"
+        android:onClick="AddNotes"
+        android:clickable="true"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/delete_note_button"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="6dp"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/ic_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add_note_button"
         app:layout_constraintRight_toLeftOf="@id/add_note_button"
@@ -109,7 +107,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="6dp"
-        android:src="@drawable/ic_edit"
+        android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/add_note_button"
