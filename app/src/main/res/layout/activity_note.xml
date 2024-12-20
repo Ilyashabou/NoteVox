@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="#E3F2FD"
     android:padding="16dp">
 
-    <!-- Settings Icon -->
+    <!-- Icône des paramètres -->
+
+    <!-- Titre NoteVox -->
+
     <ImageView
         android:id="@+id/settings_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"  />
 
     <ImageView
         android:id="@+id/home_button"
@@ -25,7 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <!-- Title -->
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -38,63 +41,67 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- SearchView -->
+    <!-- Bannière bleue avec "NOTE 1" -->
 
-    <SearchView
-        android:id="@+id/search_view"
+    <!-- Zone d'entrée de texte -->
+    <EditText
+        android:id="@+id/noteBanner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="10dp"
+        android:padding="16dp"
+        android:hint="Add a title"
+        android:textSize="20sp"
         android:background="@drawable/rounded_search_background"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search notes..."
-        android:elevation="20dp"
-        android:padding="8dp"
-        android:textColorHint="@color/hintTextColor"
-        android:textColor="@android:color/black" />
+         />
 
-    <!-- List of Notes -->
-    <LinearLayout
-        android:id="@+id/notes_list"
+    <EditText
+        android:id="@+id/noteContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical"
+        android:background="@drawable/rounded_search_background"
+        android:gravity="center"
+        android:hint="Write your note here..."
+        android:overScrollMode="always"
+        android:padding="16dp"
+        android:scrollbars="vertical"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_view">
+        app:layout_constraintTop_toBottomOf="@id/noteBanner"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="567dp"
-            android:layout_marginTop="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_note"
-            />
-
-    </LinearLayout>
-
-    <!-- Add Note Button -->
     <ImageView
-        android:id="@+id/add_note_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/button1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/pause_circle"
+        app:layout_constraintBottom_toTopOf="@+id/mainButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_add"
-        android:layout_marginBottom="6dp"
-        android:contentDescription="Add a new note"
-        android:onClick="AddNotes"
-        android:clickable="true"
-        android:focusable="true" />
+        />
 
+    <ImageView
+        android:id="@+id/mainButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/microphone_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+    <ImageView
+        android:id="@+id/button2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/save_circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

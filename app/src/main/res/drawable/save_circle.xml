@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Circle background -->
+    <path
+        android:fillColor="#FF4CAF50"
+        android:pathData="M24,2a22,22 0,1 1,-22,22 22,22 0,0 1,22,-22z" />
+    <!-- Save icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,10h-16v28h20v-24l-4,-4zM28,34h-12v-10h12v10zM28,16h-12v-4h12v4z" />
+</vector>

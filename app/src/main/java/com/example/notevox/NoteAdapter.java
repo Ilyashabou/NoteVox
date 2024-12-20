@@ -16,8 +16,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     private final List<String> notes;
 
-
-
     // Constructor to pass data to the adapter
     public NoteAdapter(List<String> notes) {
         this.notes = notes;

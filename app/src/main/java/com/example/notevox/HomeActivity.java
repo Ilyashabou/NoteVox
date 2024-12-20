@@ -33,8 +33,6 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
@@ -42,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void AddNotes(View view) {
-        Intent intent = new Intent(this, NotesActivity.class);
+        Intent intent = new Intent(this, NoteActivity.class);
         startActivity(intent);
     }
 
