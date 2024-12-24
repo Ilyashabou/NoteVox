@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         fetchNotesFromFirebase();
 
         // Initialize the adapter (start with an empty list)
-        noteAdapter = new NoteAdapter(this, noteList);
+        noteAdapter = new NoteAdapter(this, noteList, this::deleteNoteFromFirebase);
         recyclerView.setAdapter(noteAdapter);
     }
 
@@ -71,6 +71,31 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Method to delete a note from Firebase
+    private void deleteNoteFromFirebase(String noteId, int position) {
+        if (noteId == null || position < 0 || position >= noteList.size()) {
+            Toast.makeText(this, "Invalid note or position", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference notesRef = database.getReference("notes");
+
+        // Remove note from Firebase
+        notesRef.child(noteId).removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    // Successfully deleted from Firebase
+                    noteList.remove(position); // Remove from local list
+                    noteAdapter.notifyItemRemoved(position); // Update RecyclerView
+                    Toast.makeText(this, "Note deleted", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Handle error
+                    Toast.makeText(this, "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
 
     public void AddNotes(View view) {
         Intent intent = new Intent(this, NoteActivity.class);

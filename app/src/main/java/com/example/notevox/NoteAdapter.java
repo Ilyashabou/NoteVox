@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.notevox.R;
 
 import java.util.List;
 
@@ -18,20 +17,24 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     private final List<Note> notes; // Use Note objects, not just Strings
     private final Context context;
+    private final NoteDeleteListener deleteListener;
 
     // Constructor to pass data to the adapter
-    public NoteAdapter(Context context, List<Note> notes) {
+    public NoteAdapter(Context context, List<Note> notes, NoteDeleteListener deleteListener) {
         this.context = context;
         this.notes = notes;
+        this.deleteListener = deleteListener;
     }
 
     // ViewHolder class to hold references to each item
     public static class NoteViewHolder extends RecyclerView.ViewHolder {
         public TextView noteText;
+        public ImageButton deleteButton;
 
         public NoteViewHolder(View itemView) {
             super(itemView);
             noteText = itemView.findViewById(R.id.note_text);
+            deleteButton = itemView.findViewById(R.id.delete_button);
         }
     }
 
@@ -54,11 +57,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             intent.putExtra("NOTE_ID", note.getId()); // Pass the unique ID of the note
             context.startActivity(intent);
         });
-    }
 
+        // Set OnClickListener for delete button
+        holder.deleteButton.setOnClickListener(v -> deleteListener.onDelete(note.getId(), position));
+    }
 
     @Override
     public int getItemCount() {
         return notes.size();
+    }
+
+    // Interface for delete listener
+    public interface NoteDeleteListener {
+        void onDelete(String noteId, int position);
     }
 }

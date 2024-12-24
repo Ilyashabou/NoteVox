@@ -12,18 +12,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_edit"
-
+        android:layout_weight="0"
         />
 
     <TextView
         android:id="@+id/note_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:textSize="25sp"
         android:textColor="@android:color/black"
         android:text="Note Placeholder"
         android:layout_below="@id/image_item"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="16dp"
+        android:layout_weight="10"/>
+
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="Delete"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="center"
+        android:layout_weight="1"/>
 
 
 </LinearLayout>

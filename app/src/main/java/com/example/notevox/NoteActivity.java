@@ -105,4 +105,13 @@ public class NoteActivity extends AppCompatActivity {
         startActivity(intent);
         finish(); // Finish this activity to go back to HomeActivity
     }
+    public void GoHome(View view) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void GoSetting(View view) {
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
+    }
 }
