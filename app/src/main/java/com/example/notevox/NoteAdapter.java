@@ -1,10 +1,12 @@
 package com.example.notevox;
 
-import android.text.NoCopySpan;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,10 +16,12 @@ import java.util.List;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
-    private final List<String> notes;
+    private final List<Note> notes; // Use Note objects, not just Strings
+    private final Context context;
 
     // Constructor to pass data to the adapter
-    public NoteAdapter(List<String> notes) {
+    public NoteAdapter(Context context, List<Note> notes) {
+        this.context = context;
         this.notes = notes;
     }
 
@@ -41,8 +45,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        String note = notes.get(position);
-        holder.noteText.setText(note);
+        Note note = notes.get(position);
+        holder.noteText.setText(note.getName()); // Set note name or title
+
+        // Set OnClickListener to navigate to NoteActivity with the note ID
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, NoteActivity.class);
+            intent.putExtra("NOTE_ID", note.getId()); // Pass the unique ID of the note
+            context.startActivity(intent);
+        });
     }
 
     @Override
