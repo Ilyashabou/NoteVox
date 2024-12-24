@@ -17,7 +17,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note); // Set the content for this activity
+        setContentView(R.layout.activity_note);
 
         // Initialize EditText fields
         noteTitle = findViewById(R.id.noteBanner);
@@ -47,20 +47,14 @@ public class NoteActivity extends AppCompatActivity {
         existingNoteId = getIntent().getStringExtra("NOTE_ID");
         if (existingNoteId != null) {
             // If it's an existing note, populate the fields with the note data
-            // You will need to implement logic to load the note data from Firebase here
             loadExistingNoteData(existingNoteId);
         }
     }
 
     private void loadExistingNoteData(String noteId) {
-        // Fetch the note data from Firebase and update the EditText fields
-        // This is just a placeholder for loading existing data.
-        // You should use Firebase methods to retrieve and set data for the title and content.
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("notes").child(noteId);
 
-        // Assuming you're loading data into the fields (you can customize this based on your Firebase setup)
         myRef.get().addOnSuccessListener(snapshot -> {
             if (snapshot.exists()) {
                 String title = snapshot.child("name").getValue(String.class);
@@ -74,18 +68,6 @@ public class NoteActivity extends AppCompatActivity {
         });
     }
 
-    // Navigate to HomeActivity
-    public void GoHome(View view) {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-    // Navigate to SettingActivity
-    public void GoSetting(View view) {
-        Intent intent = new Intent(this, SettingActivity.class);
-        startActivity(intent);
-    }
-
     // Save the note to Firebase
     public void GoSave(View view) {
         String title = noteTitle.getText().toString();
@@ -93,8 +75,7 @@ public class NoteActivity extends AppCompatActivity {
 
         // Ensure title and content are not empty
         if (title.isEmpty() || content.isEmpty()) {
-            // Show a message if fields are empty
-            return;
+            return; // You can add a Toast message here if needed
         }
 
         // Get Firebase reference
@@ -114,11 +95,12 @@ public class NoteActivity extends AppCompatActivity {
             // Push the new note to Firebase
             String key = myRef.push().getKey(); // Generate a unique key for the new note
             if (key != null) {
+                newNote.setId(key);
                 myRef.child(key).setValue(newNote); // Save the new note under the generated key
             }
         }
 
-        // After saving, navigate back to HomeActivity (optional)
+        // After saving, navigate back to HomeActivity
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish(); // Finish this activity to go back to HomeActivity

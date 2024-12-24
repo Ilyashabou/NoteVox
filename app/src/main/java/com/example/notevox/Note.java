@@ -1,12 +1,12 @@
 package com.example.notevox;
 
 public class Note {
-    private int id;
+    private String id;  // Change from int to String
     private String name;
-    private String content; // New field for the note's content
+    private String content;
 
     // Constructor with all fields
-    public Note(int id, String name, String content) {
+    public Note(String id, String name, String content) {
         this.id = id;
         this.name = name;
         this.content = content;
@@ -16,11 +16,11 @@ public class Note {
     public Note() {}
 
     // Getter and setter for id
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

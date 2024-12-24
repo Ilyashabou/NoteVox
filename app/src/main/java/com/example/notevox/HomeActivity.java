@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
                     // Extract note data (assuming "id" and "name" fields in Firebase)
                     Note note = snapshot.getValue(Note.class);
                     if (note != null) {
+                        note.setId(snapshot.getKey());
                         noteList.add(note); // Add note to the list
                     }
                 }
