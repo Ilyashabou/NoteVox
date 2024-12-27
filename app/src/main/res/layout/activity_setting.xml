@@ -119,36 +119,6 @@
                     android:textSize="16sp" />
             </FrameLayout>
 
-            <!-- Notifications -->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:padding="5dp">
-
-                <Switch
-                    android:id="@+id/notifications"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:gravity="center_vertical"
-                    android:padding="8dp"
-                    android:text="Notifications"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-
-            </FrameLayout>
-
-
-            <!-- Change Note Sorting -->
-            <CheckBox
-                android:id="@+id/change_note_sorting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Change Note Sorting"
-                android:textColor="#000"
-                android:textSize="16sp" />
-
             <!-- Auto-Save Notes -->
             <CheckBox
                 android:id="@+id/auto_save_notes"
@@ -158,7 +128,6 @@
                 android:text="Auto-Save Notes"
                 android:textColor="#000"
                 android:textSize="16sp" />
-
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

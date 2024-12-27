@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState); // Call the parent class's onCreate
         setContentView(R.layout.activity_home);
 
+
         // Get reference to RecyclerView
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -2,16 +2,25 @@ package com.example.notevox;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.view.View;
+import android.widget.Toast;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class NoteActivity extends AppCompatActivity {
 
+    private static final int VOICE_INPUT_REQUEST_CODE = 100;
     private EditText noteTitle, noteContent;
+    private ImageView saveButton, mainButton;
     private String existingNoteId = null;
 
     @Override
@@ -19,35 +28,81 @@ public class NoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
+
         // Initialize EditText fields
         noteTitle = findViewById(R.id.noteBanner);
         noteContent = findViewById(R.id.noteContent);
 
         // Initialize buttons
-        ImageView mainButton = findViewById(R.id.mainButton);
-        ImageView button1 = findViewById(R.id.button1);
-        ImageView button2 = findViewById(R.id.button2);
+        mainButton = findViewById(R.id.mainButton);
+        saveButton = findViewById(R.id.button2);
 
         // Initially hide the buttons
-        button1.setVisibility(View.GONE);
-        button2.setVisibility(View.GONE);
+        saveButton.setVisibility(View.GONE);
 
-        // Set the button click listener to toggle visibility
-        mainButton.setOnClickListener(view -> {
-            if (button1.getVisibility() == View.GONE && button2.getVisibility() == View.GONE) {
-                button1.setVisibility(View.VISIBLE);
-                button2.setVisibility(View.VISIBLE);
-            } else {
-                button1.setVisibility(View.GONE);
-                button2.setVisibility(View.GONE);
+        // Add TextWatcher to EditText fields to toggle saveButton visibility
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used
             }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Show saveButton if any text is entered
+                toggleSaveButtonVisibility();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not used
+            }
+        };
+
+        noteTitle.addTextChangedListener(textWatcher);
+        noteContent.addTextChangedListener(textWatcher);
+
+        // Main button starts/restarts voice input
+        mainButton.setOnClickListener(view -> {
+            saveButton.setVisibility(View.VISIBLE);
+            startVoiceInput();
         });
 
-        // Check if the activity was opened with an existing note ID
+
+        // Save button saves the note
+        saveButton.setOnClickListener(this::GoSave);
+
+        // Load existing note if applicable
         existingNoteId = getIntent().getStringExtra("NOTE_ID");
         if (existingNoteId != null) {
-            // If it's an existing note, populate the fields with the note data
             loadExistingNoteData(existingNoteId);
+        }
+    }
+
+    private void startVoiceInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak your note...");
+
+        try {
+            startActivityForResult(intent, VOICE_INPUT_REQUEST_CODE);
+        } catch (Exception e) {
+            Toast.makeText(this, "Your device does not support voice input", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == VOICE_INPUT_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if (results != null && !results.isEmpty()) {
+                String recognizedText = results.get(0);
+                noteContent.append(recognizedText + " "); // Append recognized text to the note content
+                toggleSaveButtonVisibility();
+            }
         }
     }
 
@@ -68,43 +123,48 @@ public class NoteActivity extends AppCompatActivity {
         });
     }
 
+    private void toggleSaveButtonVisibility() {
+        // Show saveButton only if there is text in either EditText field
+        if (!noteTitle.getText().toString().trim().isEmpty() || !noteContent.getText().toString().trim().isEmpty()) {
+            saveButton.setVisibility(View.VISIBLE);
+        } else {
+            saveButton.setVisibility(View.GONE);
+        }
+    }
+
     // Save the note to Firebase
     public void GoSave(View view) {
         String title = noteTitle.getText().toString();
         String content = noteContent.getText().toString();
 
-        // Ensure title and content are not empty
         if (title.isEmpty() || content.isEmpty()) {
-            return; // You can add a Toast message here if needed
+            Toast.makeText(this, "Title and content cannot be empty", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        // Get Firebase reference
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("notes");
 
         if (existingNoteId != null) {
-            // Update the existing note with the same ID
             myRef.child(existingNoteId).child("name").setValue(title);
             myRef.child(existingNoteId).child("content").setValue(content);
         } else {
-            // Create a new note with a unique ID
             Note newNote = new Note();
             newNote.setName(title);
             newNote.setContent(content);
 
-            // Push the new note to Firebase
-            String key = myRef.push().getKey(); // Generate a unique key for the new note
+            String key = myRef.push().getKey();
             if (key != null) {
                 newNote.setId(key);
-                myRef.child(key).setValue(newNote); // Save the new note under the generated key
+                myRef.child(key).setValue(newNote);
             }
         }
 
-        // After saving, navigate back to HomeActivity
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
-        finish(); // Finish this activity to go back to HomeActivity
+        finish();
     }
+
     public void GoHome(View view) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);

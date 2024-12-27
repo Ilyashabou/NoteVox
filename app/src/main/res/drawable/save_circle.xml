@@ -5,7 +5,7 @@
     android:viewportHeight="48">
     <!-- Circle background -->
     <path
-        android:fillColor="#FF4CAF50"
+        android:fillColor="#FF6200EE"
         android:pathData="M24,2a22,22 0,1 1,-22,22 22,22 0,0 1,22,-22z" />
     <!-- Save icon -->
     <path
