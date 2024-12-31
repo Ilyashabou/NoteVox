@@ -1,29 +1,59 @@
 package com.example.notevox;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.example.notevox.R.id;
-import java.util.Arrays;
-import java.util.List;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String PREFS_NAME = "notevox_prefs";
+    private static final String KEY_FIRST_TIME = "first_time";
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Simulate a loading delay
-        new Handler().postDelayed(() -> {
-            // Transition to another activity (e.g., HomeActivity)
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        }, 3000); // 3 seconds delay
+        auth = FirebaseAuth.getInstance();
 
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isFirstTime = preferences.getBoolean(KEY_FIRST_TIME, true);
+
+        // If it's the first time, navigate to the LoginActivity
+        if (isFirstTime) {
+            new Handler().postDelayed(() -> {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(KEY_FIRST_TIME, false); // Update the flag for first-time check
+                editor.apply();
+
+                // Navigate to LoginActivity after splash delay
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish(); // Close MainActivity
+            }, 3000);  // Optional splash screen delay
+        } else {
+            // If it's not the first time, check if the user is logged in
+            if (auth.getCurrentUser() != null) {
+                // If user is logged in, navigate to HomeActivity
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();  // Close MainActivity
+                }, 3000);  // Optional delay
+            } else {
+                // If not logged in, navigate to LoginActivity
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();  // Close MainActivity
+                }, 3000);  // Optional delay
+            }
+        }
     }
 }
