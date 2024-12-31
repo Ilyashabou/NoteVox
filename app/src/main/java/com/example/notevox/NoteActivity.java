@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
@@ -107,10 +109,11 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void loadExistingNoteData(String noteId) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get current user's UID
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("notes").child(noteId);
+        DatabaseReference userNotesRef = database.getReference("notes").child(userId).child(noteId);
 
-        myRef.get().addOnSuccessListener(snapshot -> {
+        userNotesRef.get().addOnSuccessListener(snapshot -> {
             if (snapshot.exists()) {
                 String title = snapshot.child("name").getValue(String.class);
                 String content = snapshot.child("content").getValue(String.class);
@@ -122,6 +125,7 @@ public class NoteActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void toggleSaveButtonVisibility() {
         // Show saveButton only if there is text in either EditText field
@@ -142,21 +146,22 @@ public class NoteActivity extends AppCompatActivity {
             return;
         }
 
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get current user's UID
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("notes");
+        DatabaseReference userNotesRef = database.getReference("notes").child(userId);
 
         if (existingNoteId != null) {
-            myRef.child(existingNoteId).child("name").setValue(title);
-            myRef.child(existingNoteId).child("content").setValue(content);
+            userNotesRef.child(existingNoteId).child("name").setValue(title);
+            userNotesRef.child(existingNoteId).child("content").setValue(content);
         } else {
             Note newNote = new Note();
             newNote.setName(title);
             newNote.setContent(content);
 
-            String key = myRef.push().getKey();
+            String key = userNotesRef.push().getKey();
             if (key != null) {
                 newNote.setId(key);
-                myRef.child(key).setValue(newNote);
+                userNotesRef.child(key).setValue(newNote);
             }
         }
 
@@ -164,6 +169,7 @@ public class NoteActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
     public void GoHome(View view) {
         Intent intent = new Intent(this, HomeActivity.class);

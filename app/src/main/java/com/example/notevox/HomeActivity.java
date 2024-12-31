@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,15 +68,15 @@ public class HomeActivity extends AppCompatActivity {
 
     // Method to fetch notes from Firebase
     private void fetchNotesFromFirebase() {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get current user's UID
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference notesRef = database.getReference("notes"); // Reference to your notes data
+        DatabaseReference userNotesRef = database.getReference("notes").child(userId); // Reference user's notes
 
-        notesRef.addValueEventListener(new ValueEventListener() {
+        userNotesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 noteList.clear(); // Clear the list to avoid duplicates
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Extract note data (assuming "id" and "name" fields in Firebase)
                     Note note = snapshot.getValue(Note.class);
                     if (note != null) {
                         note.setId(snapshot.getKey());
@@ -89,11 +90,11 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Handle any error that occurred while reading data
                 Toast.makeText(HomeActivity.this, "Error fetching notes", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     // Filter notes based on search query
     private void filterNotes(String query) {
@@ -117,23 +118,20 @@ public class HomeActivity extends AppCompatActivity {
             return;
         }
 
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get current user's UID
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference notesRef = database.getReference("notes");
+        DatabaseReference userNotesRef = database.getReference("notes").child(userId);
 
-        // Remove note from Firebase
-        notesRef.child(noteId).removeValue()
+        userNotesRef.child(noteId).removeValue()
                 .addOnSuccessListener(aVoid -> {
-                    // Successfully deleted from Firebase
                     noteList.remove(position); // Remove from local list
                     filteredNoteList.remove(position); // Remove from filtered list too
                     noteAdapter.notifyItemRemoved(position); // Update RecyclerView
                     Toast.makeText(this, "Note deleted", Toast.LENGTH_SHORT).show();
                 })
-                .addOnFailureListener(e -> {
-                    // Handle error
-                    Toast.makeText(this, "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to delete note: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
 
     // Intent to add a new note
     public void AddNotes(View view) {
