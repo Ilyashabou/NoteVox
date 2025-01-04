@@ -29,4 +29,14 @@
     <color name="gray">#D3D3D3</color> <!-- Border Color -->
     <color name="blue_primary">#2196F3</color> <!-- Optional Primary Theme Color -->
 
+    <color name="primaryTextColor">#333333</color>
+    <color name="secondaryTextColor">#555555</color>
+    <color name="errorTextColor">#FF0000</color>
+    <color name="successTextColor">#00C853</color>
+    <color name="backgroundColor">#F5F5F5</color>
+    <color name="buttonColor">#1976D2</color>
+    <color name="editTextBackground">#FFFFFF</color>
+    <color name="strokeColor">#CCCCCC</color>
+
+
 </resources>

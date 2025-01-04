@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState); // Call the parent class's onCreate
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
 
