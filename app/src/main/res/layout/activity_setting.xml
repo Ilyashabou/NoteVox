@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#E3F2FD"
+    style="@style/screen"
     android:padding="16dp">
 
 
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Settings"
-        android:textColor="@android:color/black"
+        style="@style/text"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/settings_card"
@@ -90,13 +90,13 @@
 
                 <!-- Wrap Switch in a FrameLayout for proper touch target -->
                 <Switch
-                    android:id="@+id/voice_commands"
+                    android:id="@+id/switchDarkMode"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:gravity="center_vertical"
                     android:padding="8dp"
                     android:text="Voice Commands"
-                    android:textColor="#000"
+                    style="@style/text"
                     android:textSize="16sp" />
 
             </FrameLayout>
@@ -115,7 +115,7 @@
                     android:gravity="center_vertical"
                     android:padding="8dp"
                     android:text="Dark/Light Mode"
-                    android:textColor="#000"
+                    style="@style/text"
                     android:textSize="16sp" />
             </FrameLayout>
 
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Auto-Save Notes"
-                android:textColor="#000"
+                style="@style/text"
                 android:textSize="16sp" />
 
         </LinearLayout>

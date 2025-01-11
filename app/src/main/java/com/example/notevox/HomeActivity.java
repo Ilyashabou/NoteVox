@@ -29,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -65,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
 
     // Method to fetch notes from Firebase
     private void fetchNotesFromFirebase() {

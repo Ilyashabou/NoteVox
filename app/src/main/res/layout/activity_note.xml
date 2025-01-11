@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E3F2FD"
+    style="@style/screen"
     android:padding="16dp">
 
     <!-- Icône des paramètres -->
@@ -60,8 +60,10 @@
         android:padding="16dp"
         android:hint="Add a title"
         android:textSize="20sp"
+        android:textColor="@android:color/black"
         android:background="@drawable/rounded_search_background"
-         />
+    />
+
 
     <EditText
         android:id="@+id/noteContent"

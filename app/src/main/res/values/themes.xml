@@ -5,5 +5,32 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Notevox" parent="Base.Theme.Notevox" />
+
+    <style name="Theme.Notevox" parent="Base.Theme.Notevox">
+        <!-- Other styles -->
+        <item name="iconColor">@android:color/black</item>
+    </style>
+
+
+    <style name="screen">
+        <item name="android:background">#E3F2FD</item>
+    </style>
+
+    <style name="text">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="icon">
+        <item name="android:src">@android:color/black</item>
+    </style>
+
+
+
+
+
+
+
+
+
+
 </resources>

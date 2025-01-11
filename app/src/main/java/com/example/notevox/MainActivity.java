@@ -6,33 +6,39 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String PREFS_NAME = "notevox_prefs";
+    private static final String PREFS_NAME = "notevox_prefs"; // Use the same preferences file
     private static final String KEY_FIRST_TIME = "first_time";
+    private static final String DARK_MODE_KEY = "dark_mode_enabled"; // Key for dark mode setting
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        // Apply the theme based on the saved preference before setContentView()
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean nightMode = preferences.getBoolean(DARK_MODE_KEY, false);  // Read the dark mode preference
+        AppCompatDelegate.setDefaultNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
+        setContentView(R.layout.activity_main); // Now, set the content view after applying the theme
 
         auth = FirebaseAuth.getInstance();
 
-        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean isFirstTime = preferences.getBoolean(KEY_FIRST_TIME, true);
 
-        // If it's the first time, navigate to the LoginActivity
         if (isFirstTime) {
+            // If it's the first time, navigate to the LoginActivity
             new Handler().postDelayed(() -> {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean(KEY_FIRST_TIME, false); // Update the flag for first-time check
                 editor.apply();
 
-                // Navigate to LoginActivity after splash delay
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish(); // Close MainActivity
