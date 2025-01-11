@@ -6,65 +6,68 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingActivity extends AppCompatActivity {
 
-    Switch Switcher;
-    boolean nightMODE;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    private Switch Switcher;
+    private boolean nightMODE;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
-    private static final String PREFERENCES_FILE = "notevox_prefs"; // Use the same preferences file
-    private static final String DARK_MODE_KEY = "dark_mode_enabled"; // Key for dark mode setting
+    private static final String PREFERENCES_FILE = "notevox_prefs";
+    private static final String DARK_MODE_KEY = "dark_mode_enabled";
 
     private Button btnLogout;
     private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
+        // Set the theme based on preferences before setting the content view
+        sharedPreferences = getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        nightMODE = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
+        AppCompatDelegate.setDefaultNightMode(
+                nightMODE ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+        );
+
         setContentView(R.layout.activity_setting);
 
         auth = FirebaseAuth.getInstance();
         btnLogout = findViewById(R.id.btnLogout);
         Switcher = findViewById(R.id.dark_mode);
 
-        sharedPreferences = getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        nightMODE = sharedPreferences.getBoolean(DARK_MODE_KEY, false);
-
-        // Apply the stored night mode preference on launch
-        if (nightMODE) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            Switcher.setChecked(true);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            Switcher.setChecked(false);
-        }
+        // Set the switch state based on the stored preference
+        Switcher.setChecked(nightMODE);
 
         // Listener for Switch changes
         Switcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // Update the night mode setting
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
+            AppCompatDelegate.setDefaultNightMode(
+                    isChecked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+            );
 
             // Save the preference
             editor = sharedPreferences.edit();
             editor.putBoolean(DARK_MODE_KEY, isChecked);
             editor.apply();
+
+            // Restart the activity to apply changes
+            restartActivity();
         });
 
         btnLogout.setOnClickListener(view -> logoutUser());
+    }
+
+    private void restartActivity() {
+        Intent intent = new Intent(this, SettingActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void GoHome(View view) {

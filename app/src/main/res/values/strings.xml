@@ -2,4 +2,11 @@
     <string name="app_name">Notevox</string>
     <string name="settings">Settings</string>
 
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>French</item>
+    </string-array>
+
+
 </resources>

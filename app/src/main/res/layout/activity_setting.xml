@@ -118,16 +118,20 @@
                     style="@style/text"
                     android:textSize="16sp" />
             </FrameLayout>
-
-            <!-- Auto-Save Notes -->
-            <CheckBox
-                android:id="@+id/auto_save_notes"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Auto-Save Notes"
+                android:minHeight="48dp"
+                android:padding="8dp">
+            <Spinner
+                android:id="@+id/language_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 style="@style/text"
-                android:textSize="16sp" />
+                android:entries="@array/language_options"
+                android:spinnerMode="dropdown" />
+            </FrameLayout>
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
